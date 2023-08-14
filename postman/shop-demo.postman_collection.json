@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "36f400f9-5f8c-4a85-bf0e-29ec9b40dab5",
+		"name": "shop-demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4611251"
+	},
+	"item": [
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "get-customer-by-email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{customers-hostname}}/api/Sample?tenantCode={{tenantcode}}&email=39d6d059-11cf-4911-817c-e75bffd2cb86@marcelocastelo.io",
+							"host": [
+								"{{customers-hostname}}"
+							],
+							"path": [
+								"api",
+								"Sample"
+							],
+							"query": [
+								{
+									"key": "tenantCode",
+									"value": "{{tenantcode}}"
+								},
+								{
+									"key": "email",
+									"value": "39d6d059-11cf-4911-817c-e75bffd2cb86@marcelocastelo.io"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vault",
+			"item": [
+				{
+					"name": "http://localhost:8201/v1/mcio/data/postgreSQLConnectionString",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8201/v1/mcio/data/postgreSQLConnectionString",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8201",
+							"path": [
+								"v1",
+								"mcio",
+								"data",
+								"postgreSQLConnectionString"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "customers-hostname",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "tenantcode",
+			"value": "cef12507-80dc-47a5-bafb-a95a988ee560",
+			"type": "string"
+		}
+	]
+}

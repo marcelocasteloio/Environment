@@ -1,0 +1,43 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+
+exporters:
+
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+
+  logging:
+    loglevel: debug
+
+  jaeger:
+    endpoint: mcio-jaeger:14250
+    tls:
+      insecure: true
+
+  file:
+    path: /etc/output/logs.json
+
+processors:
+  
+  batch:
+
+service:
+
+  pipelines:
+
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [jaeger]
+
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]
+      
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging]

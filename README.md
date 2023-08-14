@@ -84,4 +84,6 @@ Esse documento não irá abordar aspectos da instalação do WSL. Caso você nã
 
 Para esse documento, também vou assumir que você já tenha uma distribuição Linux instalada. Caso não tenha a distribuição instalada e configurada, você pode seguir a documentação [aqui](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview).
 
-A partir daqui, vou considerar que você já tenha o WSL instalado.
+A partir daqui, vou considerar que você já tenha o WSL instalado e uma distribuição linux também instalda. Daqui para frente, vou considerar que você tenha instalado a distribuição do Ubuntu.
+
+

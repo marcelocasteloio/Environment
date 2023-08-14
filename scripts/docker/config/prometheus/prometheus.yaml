@@ -1,0 +1,37 @@
+global:
+  scrape_interval: 1s
+  evaluation_interval: 1s
+
+scrape_configs:
+
+  - job_name: 'mcio-otel-collector'
+    static_configs:
+    - targets: ['mcio-otel-collector:8889']
+    - targets: ['mcio-otel-collector:8888']
+
+  - job_name: 'mcio-prometheus'
+    static_configs:
+      - targets: ["mcio-prometheus:9090"]
+  
+  - job_name: 'mcio-postgres-exporter'
+    static_configs:
+      - targets: ["mcio-postgres-exporter:9187"]
+  
+  - job_name: 'mcio-redis-exporter'
+    static_configs:
+      - targets: ["mcio-redis-exporter:9121"]
+  
+  - job_name: 'mcio-mongo-exporter'
+    static_configs:
+      - targets: ['mcio-mongo-exporter:9216']
+  
+  - job_name: 'mcio-rabbitmq'
+    static_configs:
+      - targets: ['mcio-rabbitmq:15692']
+    metrics_path: /metrics
+    params:
+      vhost: ['/']
+  
+  - job_name: 'mcio-jaeger'
+    static_configs:
+      - targets: ['mcio-jaeger:14269']
