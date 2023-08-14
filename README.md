@@ -53,8 +53,6 @@ A seguir, temos uma imagem geral desse ambiente local de desenvolvimento. Esse a
         -  **Grafana:** Monitoramento e alertas (já possui web client integrado)
      -  Gerenciamento de containers:
         -  **Portainer:** Gerenciador de containers (já possui web client integrado)
-     -  SAST:
-        -  **SonarQube:** Análise estática de código (já possui web client integrado)
      -  Web Clients:
         -  **PgAdmin:** Web Client para acesso e gerenciamento do PostgreSQL
         -  **Mongo Express:** Web Client para acesso e gerenciamento do MongoDB
@@ -86,4 +84,20 @@ Para esse documento, também vou assumir que você já tenha uma distribuição 
 
 A partir daqui, vou considerar que você já tenha o WSL instalado e uma distribuição linux também instalda. Daqui para frente, vou considerar que você tenha instalado a distribuição do Ubuntu.
 
+A patir de agora, de forma opcional, vamos realizar uma simples configuração para limitar o uso de memória RAM utilizada pelo WSL. Você pode ver, com detalhes, sobre as possíveis configurações do WSL [aqui](https://learn.microsoft.com/pt-br/windows/wsl/wsl-config).
 
+No projeto, já existe um arquivo `.wslconfig` no camnho `wsl/.wslconfig` que você pode utilizar no seu ambiente. Para criar seu próprio arquivo de configuração, siga as etapas a seguir:
+
+1. Abra o PowerShell.
+2. Execute o comando `cd $HOME` para navegar até o diretório do seu usuário
+3. Execute o comando `New-Item .wslconfig` para criar o arquivo `.wslconfig`
+4. Execute o comando `notepad .\.wslconfig` para abrir o bloco de notas com o arquivo `.wslconfig` aberto
+5. Adicione o conteúdo abaixo, salve o arquivo e pode fechar o bloco de notas:
+
+```
+[wsl2]
+
+memory=4GB
+```
+6. De volta ao Powershell, execute o comando `wsl --shutdown` para encerrar o WSL
+7. execute o comando `wsl` para executar o wsl novamente com as novas configurações
