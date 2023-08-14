@@ -89,15 +89,30 @@ A patir de agora, de forma opcional, vamos realizar uma simples configuração p
 No projeto, já existe um arquivo `.wslconfig` no camnho `wsl/.wslconfig` que você pode utilizar no seu ambiente. Para criar seu próprio arquivo de configuração, siga as etapas a seguir:
 
 1. Abra o PowerShell.
-2. Execute o comando `cd $HOME` para navegar até o diretório do seu usuário
-3. Execute o comando `New-Item .wslconfig` para criar o arquivo `.wslconfig`
-4. Execute o comando `notepad .\.wslconfig` para abrir o bloco de notas com o arquivo `.wslconfig` aberto
-5. Adicione o conteúdo abaixo, salve o arquivo e pode fechar o bloco de notas:
+2. Navegue até o diretório do usuário
+   ```
+   cd $HOME
+   ```
+1. Crie um arquivo chamado `.wslconfig`
+   ```
+   New-Item .wslconfig
+   ```
+2. Abra o arquivo `.wslconfig` em um editor de texto (no exemplo abaixo, estou usando o bloco de notas)
+   ```
+   notepad .\.wslconfig
+   ```
+3. Adicione o conteúdo abaixo, salve o arquivo e pode fechar o bloco de notas:
 
-```
-[wsl2]
+   ```
+   [wsl2]
 
-memory=4GB
-```
-6. De volta ao Powershell, execute o comando `wsl --shutdown` para encerrar o WSL
-7. execute o comando `wsl` para executar o wsl novamente com as novas configurações
+   memory=4GB
+   ```
+6. Encerre o WSL
+   ```
+   wsl --shutdown
+   ```
+7. Inicie o WSL novamente para aplicar as novas configurações
+   ```
+   wsl --shutdown
+   ```
