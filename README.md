@@ -12,6 +12,9 @@ Se você utiliza um sistema operacional Linux ou MAC OS, você conseguirá utili
 - [Conteúdo](#conteúdo)
 - [Visão geral](#visão-geral)
 - [Instalando e Configurando WSL](#instalando-e-configurando-wsl)
+- [Instalação e configuração do ambiente no Docker](#instalação-e-configuração-do-ambiente-no-docker)
+- [Iniciando o ambiente após configuração do ambiente](#iniciando-o-ambiente-após-configuração-do-ambiente)
+- [Parando o ambiente](#parando-o-ambiente)
 
 
 # Visão geral
@@ -22,11 +25,13 @@ Embora minha preferência pessoal seja Linux, jogos e algumas ferramentas funcio
 
 Visando isso, para um ambiente de desenvolvimento local, unir o Windows com o Linux por meio do WSL2 é uma excelente alternativa para aqueles que possuem um hardware com 8GB de memória RAM ou mais.
 
-Para aqueles que utilizam diretamente alguma distribuição Linux ou MAC OS, poderá utilizar esse projeto com algumas poucas adaptações, porém, na maioria dos casos, usuários que já utilizam linux ou desenvolvedores que utilizam MAC OS, já são usuários mais avançados e não terão problema em realizar as adaptações.
+Para aqueles que utilizam diretamente alguma distribuição Linux ou MAC OS, poderão utilizar esse projeto com algumas poucas adaptações.
 
-Por isso, esse projeto irá utilizar como cenário um computador que tenha o sistema operacional Linux, o WSL instalado e o docker instalado dentro do WSL ao invés de instalar o docker desktop para Windows.
+Por isso, esse projeto irá utilizar como cenário um computador que tenha o sistema operacional Windows, o WSL instalado e o docker instalado dentro do WSL ao invés de instalar o docker desktop para Windows.
 
-Além disso, para evitar que seja necessário instalar alguma ferramenta para consumir as aplicações criadas (PostgreSQL, MongoDB, Redis, Kafka, RabbitMQ, Jaeger, Vault, Consul, Seq, Prometheus, Grafana e Portainer), todas possuem um client web, ou seja, é possível acessá-las pelo navegador sem a necessidade de instalar nenhuma ferramenta completar. As ferramentas instaladas no Windows como Azure Data Studio, Robo3T e Another Redis Desktop Manager são opcionais pois temos a alterantiva do web client caso fique pesado instalar todas essas ferramentas.
+Além disso, para evitar que seja necessário instalar alguma ferramenta para consumir as aplicações criadas (PostgreSQL, MongoDB, Redis, Kafka, RabbitMQ, Jaeger, Vault, Consul, Seq, Prometheus, Grafana e Portainer), todas possuem um client web, ou seja, é possível acessá-las pelo navegador sem a necessidade de instalar nenhuma ferramenta completar.
+
+As ferramentas instaladas no Windows como Azure Data Studio, Robo3T e Another Redis Desktop Manager são opcionais pois temos a alterantiva do web client caso fique pesado instalar todas essas ferramentas.
 
 A seguir, temos uma imagem geral desse ambiente local de desenvolvimento. Esse ambiente possuí as seguintes características:
 
@@ -89,30 +94,106 @@ A patir de agora, de forma opcional, vamos realizar uma simples configuração p
 No projeto, já existe um arquivo `.wslconfig` no camnho `wsl/.wslconfig` que você pode utilizar no seu ambiente. Para criar seu próprio arquivo de configuração, siga as etapas a seguir:
 
 1. Abra o PowerShell.
-2. Navegue até o diretório do usuário
+2. Navegue até o diretório do usuário:
    ```
    cd $HOME
    ```
-1. Crie um arquivo chamado `.wslconfig`
+3. Crie um arquivo chamado `.wslconfig`:
    ```
    New-Item .wslconfig
    ```
-2. Abra o arquivo `.wslconfig` em um editor de texto (no exemplo abaixo, estou usando o bloco de notas)
+4. Abra o arquivo `.wslconfig` em um editor de texto (no exemplo abaixo, estou usando o bloco de notas):
    ```
    notepad .\.wslconfig
    ```
-3. Adicione o conteúdo abaixo, salve o arquivo e pode fechar o bloco de notas:
+5. Adicione o conteúdo abaixo, salve o arquivo e pode fechar o bloco de notas:
 
    ```
    [wsl2]
 
    memory=4GB
    ```
-6. Encerre o WSL
+6. Encerre o WSL:
    ```
    wsl --shutdown
    ```
-7. Inicie o WSL novamente para aplicar as novas configurações
+7. Inicie o WSL novamente para aplicar as novas configurações:
    ```
-   wsl --shutdown
+   wsl
+   ```
+
+# Instalação e configuração do ambiente no Docker
+
+Esse procedimento deve ser feito somente uma única vez para o setup do projeto.
+
+A instalação do docker diretamente no WSL pode ser feita com base nessa [documentação](https://docs.docker.com/engine/install/ubuntu/). A instalação pode variar de acordo com a distribuição. O nosso foco será na configuração dos serviços e do ambiente.
+
+A partir desse momento, será assumido que você já tenha o WSL Instalado e configurado, uma distribuicao linux funcional com o docker instalado e funcionando.
+
+Esse documento assumirá que você clonou esse repositório no seu Windows por ser um cenário mais simples onde a maioria dos iniciantes fará, porém, a sugestão é que você clone esse repositório dentro do WSL para evitar problemas com os mapeamentos, tamanho de path e executar todo o processo dentro do seu WSL.
+
+Para subir os serviços (containers) docker dentro do wsl, siga os passos a seguir:
+
+1. Em um terminal, nave até a pasta raiz desse projeto. Por exemplo: C:\dev\github\marcelocasteloio\Environment :
+   ```
+   # Diretório de exemplo. Mude para o seu diretório 
+   cd C:\dev\github\marcelocasteloio\Environment
+   ```
+2. Navegue até a pasta `scripts\docker`:
+   ```
+   cd .\scripts\docker\
+   ```
+3. Entre na sua instância do WSL:
+   ```
+   wsl
+   ```
+4. Configure o ambiente por meio do docker compose:
+   ```
+   docker compose up -d
+   ```
+
+OBS: No momento em que esse documento foi escrito, no Windows 11, foi incluido um comportamento que, até o momento, não pode ser desabilitado que é uma configuração chamada `vmIdleTimeout` que tem como valor padrão `60000 milisegundos`, ou seja, 60 segundos. Isso quer dizer que se não estiver nenhuma sessão de terminal conectada ao WSL por mais de 60 segundos, o mesmo será encerrado. Por isso, é necessário deixar uma sessão do terminal conectado ao WSL até que esse comportamento não seja mais obrigatório.
+
+# Iniciando o ambiente após configuração do ambiente
+
+Após toda subir o ambiente de acordo com essa [seção](#instalação-e-configuração-do-ambiente-no-docker), para iniciar o ambiente, você deve executar as seguintes etapas:
+
+1. Em um terminal, nave até a pasta raiz desse projeto. Por exemplo: C:\dev\github\marcelocasteloio\Environment :
+   ```
+   # Diretório de exemplo. Mude para o seu diretório 
+   cd C:\dev\github\marcelocasteloio\Environment
+   ```
+2. Navegue até a pasta `scripts\docker`:
+   ```
+   cd .\scripts\docker\
+   ```
+3. Entre na sua instância do WSL:
+   ```
+   wsl
+   ```
+4. Inicie o ambiente por meio do docker compose:
+   ```
+   docker compose start
+   ```
+
+# Parando o ambiente
+
+Para parar os serviços que estão em execução
+
+1. Em um terminal, nave até a pasta raiz desse projeto. Por exemplo: C:\dev\github\marcelocasteloio\Environment :
+   ```
+   # Diretório de exemplo. Mude para o seu diretório 
+   cd C:\dev\github\marcelocasteloio\Environment
+   ```
+2. Navegue até a pasta `scripts\docker`:
+   ```
+   cd .\scripts\docker\
+   ```
+3. Entre na sua instância do WSL:
+   ```
+   wsl
+   ```
+4. Pare o ambiente por meio do docker compose:
+   ```
+   docker compose stop
    ```
