@@ -1,0 +1,3 @@
+hostPort: mcio-kafka-broker:9101
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true

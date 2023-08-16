@@ -69,6 +69,7 @@ services:
       - --discovering-mode 
       - --mongodb.direct-connect 
       - --collect-all
+      - --compatible-mode
     ports:
       - 9216:9216
     depends_on:
@@ -198,6 +199,21 @@ services:
     networks:
       - mcio
 
+  mcio-kafka-exporter:
+    image: sscaling/jmx-prometheus-exporter
+    container_name: mcio-kafka-exporter
+    restart: unless-stopped
+    ports:
+      - "5556:5556"
+    environment:
+       CONFIG_YML : "/etc/jmx_exporter/config.yml"
+    volumes:
+      - ./config/kafka-exporter/kafka-exporter.yml:/etc/jmx_exporter/config.yml
+    depends_on:
+      - mcio-kafka-broker
+    networks:
+      - mcio
+
   mcio-kafka-manager:
     image: hlebalbau/kafka-manager:stable
     container_name: mcio-kafka-manager
@@ -296,11 +312,13 @@ services:
       - mcio-rabbitmq
       - mcio-jaeger
       - mcio-otel-collector
+      - mcio-kafka-exporter
     ports:
         - 9090:9090
     volumes:
         - ./config/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
         - /mcio/docker/volumes/prometheus/data:/prometheus
+    user: "$UID:$GID"
     networks:
       - mcio
 
@@ -318,6 +336,7 @@ services:
       - mcio-redis
     volumes:
       - /mcio/docker/volumes/grafana/data:/var/lib/grafana
+      - ./config/grafana/provisioning:/etc/grafana/provisioning
     user: "$UID:$GID"
     networks:
       - mcio
