@@ -191,7 +191,9 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'mcio-zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://mcio-kafka-broker:29092,PLAINTEXT_INTERNAL://localhost:9092
+      KAFKA_ADVERTISED_HOST_NAME: "mcio-kafka-broker"
+      KAFKA_LISTENERS: PLAINTEXT://:29092, PLAINTEXT_INTERNAL://:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
@@ -200,15 +202,12 @@ services:
       - mcio
 
   mcio-kafka-exporter:
-    image: sscaling/jmx-prometheus-exporter
+    image: danielqsj/kafka-exporter
     container_name: mcio-kafka-exporter
     restart: unless-stopped
     ports:
-      - "5556:5556"
-    environment:
-       CONFIG_YML : "/etc/jmx_exporter/config.yml"
-    volumes:
-      - ./config/kafka-exporter/kafka-exporter.yml:/etc/jmx_exporter/config.yml
+      - "9308:9308"
+    command: "--kafka.server=mcio-kafka-broker:29092 --zookeeper.server=mcio-zookeeper:2181"
     depends_on:
       - mcio-kafka-broker
     networks:

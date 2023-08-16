@@ -1410,8 +1410,8 @@
   "schemaVersion": 38,
   "style": "dark",
   "tags": [
-    "MongoDB",
-    "Percona"
+    "prometheus",
+    "mongodb"
   ],
   "templating": {
     "list": [
