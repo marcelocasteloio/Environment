@@ -500,7 +500,8 @@
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
-    "Kafka"
+    "Kafka",
+    "prometheus"
   ],
   "templating": {
     "list": [
