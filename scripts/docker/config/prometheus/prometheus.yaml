@@ -39,3 +39,11 @@ scrape_configs:
   - job_name: 'mcio-kafka-exporter'
     static_configs:
     - targets: ['mcio-kafka-exporter:9308']
+  
+  - job_name: 'mcio-vault'
+    static_configs:
+      - targets: ['mcio-vault:8201']
+    metrics_path: /v1/sys/metrics
+    params:
+      format: ['prometheus']
+

@@ -312,6 +312,7 @@ services:
       - mcio-jaeger
       - mcio-otel-collector
       - mcio-kafka-exporter
+      - mcio-vault
     ports:
         - 9090:9090
     volumes:
