@@ -138,6 +138,8 @@ services:
     command: agent -server -client=0.0.0.0 -data-dir=/consul/data -bootstrap -ui
     ports:
       - '8500:8500'
+    environment:
+      CONSUL_ENABLE_METRICS: true
     volumes: 
       - /mcio/docker/volumes/consul/data:/consul/data
     networks:
@@ -217,8 +219,6 @@ services:
     image: hlebalbau/kafka-manager:stable
     container_name: mcio-kafka-manager
     restart: unless-stopped
-    ports:
-      - "9001:9000"
     depends_on:
       - mcio-zookeeper
     environment:
@@ -313,6 +313,7 @@ services:
       - mcio-otel-collector
       - mcio-kafka-exporter
       - mcio-vault
+      - mcio-consul
     ports:
         - 9090:9090
     volumes:

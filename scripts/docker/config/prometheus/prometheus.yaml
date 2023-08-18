@@ -47,3 +47,9 @@ scrape_configs:
     params:
       format: ['prometheus']
 
+  - job_name: 'mcio-consul'
+    static_configs:
+      - targets: ['mcio-consul:8500']
+    metrics_path: '/v1/agent/metrics'
+    params:
+      format: ['prometheus']
