@@ -221,6 +221,8 @@ services:
     restart: unless-stopped
     depends_on:
       - mcio-zookeeper
+    ports:
+      - 9001:8001
     environment:
       ZK_HOSTS: "mcio-zookeeper:2181"
       APPLICATION_SECRET: "123456"
