@@ -29,7 +29,7 @@ Para aqueles que utilizam diretamente alguma distribuição Linux ou MAC OS, pod
 
 Por isso, esse projeto irá utilizar como cenário um computador que tenha o sistema operacional Windows, o WSL instalado e o docker instalado dentro do WSL ao invés de instalar o docker desktop para Windows.
 
-Além disso, para evitar que seja necessário instalar alguma ferramenta para consumir as aplicações criadas (PostgreSQL, MongoDB, Redis, Kafka, RabbitMQ, Jaeger, Vault, Consul, Seq, Prometheus, Grafana e Portainer), todas possuem um client web, ou seja, é possível acessá-las pelo navegador sem a necessidade de instalar nenhuma ferramenta completar.
+Além disso, para evitar que seja necessário instalar alguma ferramenta para consumir as aplicações criadas (PostgreSQL, MongoDB, Redis, Kafka, RabbitMQ, Zipkin, Vault, Consul, Seq, Prometheus, Grafana e Portainer), todas possuem um client web, ou seja, é possível acessá-las pelo navegador sem a necessidade de instalar nenhuma ferramenta completar.
 
 As ferramentas instaladas no Windows como Azure Data Studio, Robo3T e Another Redis Desktop Manager são opcionais pois temos a alterantiva do web client caso fique pesado instalar todas essas ferramentas.
 
@@ -52,7 +52,7 @@ A seguir, temos uma imagem geral desse ambiente local de desenvolvimento. Esse a
         -  **Kafka + Zookeeper:** Processamento de streaming
      -  Observabilidade:
         -  **Seq:** Plataforma de log distribuido (já possui web client integrado)
-        -  **Jaeger:** Plataforma de trace (já possui web client integrado)
+        -  **Zipkin:** Plataforma de trace (já possui web client integrado)
         -  **Prometheus:** Time series database especializado para métricas, monitoramento e alertas (já possui web client integrado)
         -  **Open Telemetry Collector:** Coletor de log, trace e métricas na especificação do [Open Telemetry](https://opentelemetry.io/)
         -  **Grafana:** Monitoramento e alertas (já possui web client integrado)
