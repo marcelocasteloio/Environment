@@ -32,9 +32,11 @@ scrape_configs:
     params:
       vhost: ['/']
   
-  - job_name: 'mcio-jaeger'
+  - job_name: 'mcio-zipkin'
+    scrape_interval: 5s
+    metrics_path: '/prometheus'
     static_configs:
-      - targets: ['mcio-jaeger:14269']
+      - targets: ['mcio-zipkin:9411']
   
   - job_name: 'mcio-kafka-exporter'
     static_configs:

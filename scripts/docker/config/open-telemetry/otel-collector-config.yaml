@@ -10,12 +10,12 @@ exporters:
 
   logging:
     loglevel: debug
-
-  jaeger:
-    endpoint: mcio-jaeger:14250
+    
+  zipkin:
+    endpoint: "http://mcio-zipkin:9411/api/v2/spans"
     tls:
       insecure: true
-
+      
   file:
     path: /etc/output/logs.json
 
@@ -30,7 +30,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [jaeger]
+      exporters: [zipkin]
 
     metrics:
       receivers: [otlp]

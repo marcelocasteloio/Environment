@@ -244,22 +244,12 @@ services:
     networks:
       - mcio
 
-  mcio-jaeger:
-    image: jaegertracing/all-in-one
-    container_name: mcio-jaeger
+  mcio-zipkin:
+    image: openzipkin/zipkin
+    container_name: mcio-zipkin
     restart: unless-stopped
-    environment:
-      COLLECTOR_ZIPKIN_HOST_PORT: ":9411"
-      COLLECTOR_OTLP_ENABLED: true
     ports:
-      - 6831:6831/udp   # Jaeger Agent (jaeger.json)
-      - 6832:6832/udp   # Jaeger Agent (jaeger.thrift)
-      - 5778:5778       # Jaeger Agent (http)
-      - 16686:16686     # Jaeger Query
-      - 14250:14250     # Jaeger Collector
-      - 14268:14268     # Jaeger Collector (http)
-      - 14269:14269     # Jaeger Ingester (prometheus metrics)
-      - 9411:9411       # Zipkin Collector
+      - 9411:9411
     networks:
       - mcio
 
@@ -276,7 +266,7 @@ services:
       - 4317:4317   # OTLP gRPC receiver
       - 4318:4318   # OTLP http receiver
     depends_on:
-      - mcio-jaeger
+      - mcio-zipkin
       - mcio-seq
     networks:
       - mcio
@@ -311,7 +301,7 @@ services:
       - mcio-redis-exporter
       - mcio-mongo-exporter 
       - mcio-rabbitmq
-      - mcio-jaeger
+      - mcio-zipkin
       - mcio-otel-collector
       - mcio-kafka-exporter
     ports:
