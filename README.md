@@ -95,15 +95,15 @@ No projeto, já existe um arquivo `.wslconfig` no camnho `wsl/.wslconfig` que vo
 
 1. Abra o PowerShell.
 2. Navegue até o diretório do usuário:
-   ```
+   ```pwsh
    cd $HOME
    ```
 3. Crie um arquivo chamado `.wslconfig`:
-   ```
+   ```pwsh
    New-Item .wslconfig
    ```
 4. Abra o arquivo `.wslconfig` em um editor de texto (no exemplo abaixo, estou usando o bloco de notas):
-   ```
+   ```pwsh
    notepad .\.wslconfig
    ```
 5. Adicione o conteúdo abaixo, salve o arquivo e pode fechar o bloco de notas:
@@ -114,11 +114,11 @@ No projeto, já existe um arquivo `.wslconfig` no camnho `wsl/.wslconfig` que vo
    memory=4GB
    ```
 6. Encerre o WSL:
-   ```
+   ```pwsh
    wsl --shutdown
    ```
 7. Inicie o WSL novamente para aplicar as novas configurações:
-   ```
+   ```pwsh
    wsl
    ```
 
@@ -135,20 +135,20 @@ Esse documento assumirá que você clonou esse repositório no seu Windows por s
 Para subir os serviços (containers) docker dentro do wsl, siga os passos a seguir:
 
 1. Em um terminal, nave até a pasta raiz desse projeto. Por exemplo: C:\dev\github\marcelocasteloio\Environment :
-   ```
+   ```pwsh
    # Diretório de exemplo. Mude para o seu diretório 
    cd C:\dev\github\marcelocasteloio\Environment
    ```
 2. Navegue até a pasta `scripts\docker`:
-   ```
+   ```pwsh
    cd .\scripts\docker\
    ```
 3. Entre na sua instância do WSL:
-   ```
+   ```pwsh
    wsl
    ```
 4. Configure o ambiente por meio do docker compose:
-   ```
+   ```pwsh
    docker compose up -d
    ```
 
@@ -159,20 +159,20 @@ OBS: No momento em que esse documento foi escrito, no Windows 11, foi incluido u
 Após toda subir o ambiente de acordo com essa [seção](#instalação-e-configuração-do-ambiente-no-docker), para iniciar o ambiente, você deve executar as seguintes etapas:
 
 1. Em um terminal, nave até a pasta raiz desse projeto. Por exemplo: C:\dev\github\marcelocasteloio\Environment :
-   ```
+   ```pwsh
    # Diretório de exemplo. Mude para o seu diretório 
    cd C:\dev\github\marcelocasteloio\Environment
    ```
 2. Navegue até a pasta `scripts\docker`:
-   ```
+   ```pwsh
    cd .\scripts\docker\
    ```
 3. Entre na sua instância do WSL:
-   ```
+   ```pwsh
    wsl
    ```
 4. Inicie o ambiente por meio do docker compose:
-   ```
+   ```pwsh
    docker compose start
    ```
 
@@ -181,19 +181,19 @@ Após toda subir o ambiente de acordo com essa [seção](#instalação-e-configu
 Para parar os serviços que estão em execução
 
 1. Em um terminal, nave até a pasta raiz desse projeto. Por exemplo: C:\dev\github\marcelocasteloio\Environment :
-   ```
+   ```pwsh
    # Diretório de exemplo. Mude para o seu diretório 
    cd C:\dev\github\marcelocasteloio\Environment
    ```
 2. Navegue até a pasta `scripts\docker`:
-   ```
+   ```pwsh
    cd .\scripts\docker\
    ```
 3. Entre na sua instância do WSL:
-   ```
+   ```pwsh
    wsl
    ```
 4. Pare o ambiente por meio do docker compose:
-   ```
+   ```pwsh
    docker compose stop
    ```
